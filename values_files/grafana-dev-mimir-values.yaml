@@ -1,3 +1,74 @@
+alertmanager:
+  replicas: 150
+
+distributor:
+  replicas: 150
+
+ingester:
+  replicas: 150
+  zoneAwareReplication:
+      replicas: 100
+
+overrides_exporter:
+  replicas: 150
+
+ruler:
+  replicas: 150
+
+querier:
+  replicas: 200
+
+query_frontend:
+  replicas: 150
+
+query_scheduler:
+  replicas: 200
+
+store_gateway:
+  replicas: 150
+
+compactor:
+  replicas: 150
+
+chunks-cache:
+  replicas: 150
+
+index-cache:
+  replicas: 150
+
+metadata-cache:
+  replicas: 150
+
+results-cache:
+  replicas: 150
+
+nginx:
+  replicas: 150
+
+gateway:
+  replicas: 150
+
+admin_api:
+  replicas: 150
+
+admin-cache:
+  replicas: 150
+
+graphite:
+  querier:
+    replicas: 200
+  write_proxy:
+    replicas: 200
+
+gr-aggr-cache:
+  replicas: 150
+
+gr-metricname-cache:
+  replicas: 150
+
+continuous_test:
+  replicas: 150
+
 image:
   repository: grafana/grafana-enterprise
 
