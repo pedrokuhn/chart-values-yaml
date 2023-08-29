@@ -1,0 +1,48 @@
+image:
+  repository: grafana/grafana-enterprise
+
+persistence:
+  enabled: false
+  size: 1Gi
+
+plugins:
+  - grafana-metrics-enterprise-app
+  - moogsoft-aiops-app
+
+grafana.ini:
+  enterprise:
+    license_path: /etc/secrets/license-ge-dev.jwt
+  server:
+    root_url: https://test.com
+  auth:
+    login_maximum_inactive_lifetime_duration: 2h
+    login_maximum_lifetime_duration: 1d
+  auth.saml:
+    enabled: true
+    idp_metadata_url: https://test:8443/nidp/saml2/metadata
+    assertion_attribute_name: DisplayName
+    assertion_attribute_login: Login
+    assertion_attribute_email: Email
+    assertion_attribute_groups: Group
+    assertion_attribute_org: it-grafana-org
+    assertion_attribute_role: it-grafana-role
+    role_values_grafana_admin: admin
+    role_values_editor: editor
+    allowed_organizations: it-teldev
+  log:
+    filters: plugins
+  
+  extraSecretMounts:
+  - name: secret-files
+    mountPath: /etc/secrets/
+    secretName: ge-license-secret
+    readOnly: true
+
+  extraConfigmapMounts:
+  - name: certs-configmap
+    mountPath: /etc/ssl/certs/chtr-CA.pem
+    subPath: chtr-CA.pem
+    configMap: certs-configmap
+    readOnly: true
+
+  replicas: 2
